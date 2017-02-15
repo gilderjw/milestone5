@@ -56,6 +56,7 @@ public class M5Application {
 		tmp.addEdgeChecker(new DuplicateDependencyEdgeChecker());
 
 		tmp.addGraphMutator(new SameSimpleNameMutator(tmp.getFieldReaders(), tmp.getMethodReaders()));
+		tmp.addGraphMutator(new LawOfDemeterMutator());
 
 		tmp.process();
 	}

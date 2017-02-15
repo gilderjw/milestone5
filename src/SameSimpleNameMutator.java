@@ -157,7 +157,7 @@ public class SameSimpleNameMutator implements IUserGraphMutator {
 				}
 
 				String name1 = Utilities.getClassName(n1.getClassNode().name);
-				String name2 = Utilities.getClassName(n1.getClassNode().name);
+				String name2 = Utilities.getClassName(n2.getClassNode().name);
 
 				if(name1.equals(name2)){
 					nodesToKill.add(n1);
