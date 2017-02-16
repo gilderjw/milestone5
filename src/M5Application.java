@@ -1,7 +1,9 @@
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -13,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -168,20 +171,36 @@ public class M5Application {
 
 					tmp.process();
 
-					Thread.sleep(200);
+					Thread.sleep(2000);
 
 					JFrame imageFrame = new JFrame("image");
 					JPanel imgPanel = new JPanel();
 					JLabel imgLabel = new JLabel();
-					ImageIcon img = new ImageIcon(outputFile.getText());
+					JScrollPane pane = new JScrollPane(imgPanel);
+
+					ImageIcon img;
+
+					if(useConfig.isSelected()) {
+						System.out.println(tmp.getClass().getSuperclass());
+						for (Field f : tmp.getClass().getSuperclass().getDeclaredFields()){
+							System.out.println(f.getName());
+						}
+						Field meme = tmp.getClass().getSuperclass().getDeclaredField("f");
+						meme.setAccessible(true);
+						File file = (File) meme.get(tmp);
+						img = new ImageIcon(file.getAbsolutePath());
+					} else {
+						img = new ImageIcon(outputFile.getText());
+					}
 
 					imgLabel.setIcon(img);
 					imgPanel.add(imgLabel);
-					imageFrame.add(imgPanel);
 
+					imageFrame.add(pane);
+					imageFrame.pack();
 					imageFrame.setVisible(true);
 
-				} catch (IOException | InterruptedException e1) {
+				} catch (Exception e1) {
 					throw new RuntimeException(e1);
 				}
 
