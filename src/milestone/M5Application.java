@@ -1,3 +1,4 @@
+package milestone;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,6 +53,7 @@ public class M5Application {
 		AccessLevelArgumentProcessor a = new AccessLevelArgumentProcessor(r);
 		PatternDetectorArgumentProcessor p = new PatternDetectorArgumentProcessor(a);
 		SettingsFileCommandArgumentProcessor s = new SettingsFileCommandArgumentProcessor(p);
+		NewFileFormatDecorator f = new NewFileFormatDecorator(s);
 
 
 		//		tmp.addGraphMutator(new SameSimpleNameMutator(tmp.getFieldReaders(), tmp.getMethodReaders()));
@@ -115,7 +117,7 @@ public class M5Application {
 
 					if(useConfig.isSelected()) {
 						String[] arg = new String[] {"cfg=" + settingFile.getText()};
-						tmp = s.process(arg);
+						tmp = f.process(arg);
 					} else {
 						String access = "private";
 

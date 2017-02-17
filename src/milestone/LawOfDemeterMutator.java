@@ -1,3 +1,4 @@
+package milestone;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -11,13 +12,20 @@ import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.TypeInsnNode;
 
 import GraphReading.IUserGraphMutator;
+import GraphReading.MethodReader;
 import ProgramGraph.GraphVizEdge;
 import ProgramGraph.IEdge;
 import ProgramGraph.INode;
 import ProgramGraph.ProgramGraph;
+import application.FieldReader;
 import application.Utilities;
 
 public class LawOfDemeterMutator implements IUserGraphMutator {
+
+
+	public LawOfDemeterMutator(List<FieldReader> fr, List<MethodReader> mr) {
+
+	}
 
 	private GraphVizEdge makeEdge(IEdge e){
 		INode h = e.getIHead();
